@@ -1,4 +1,4 @@
- TrendSetter 
+### TrendSetter 
 
 Proiectul simulează parcursul unui influencer în industria modei, gestionând resursele financiare și stilul personal pentru a atinge succesul în mediul online și la evenimente exclusiviste.
 
