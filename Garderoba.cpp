@@ -120,9 +120,9 @@ void Garderoba::incarcaDinFisier(const std::string& numeFisier) {
                 f >> d >> b >> p >> s >> m >> c;
                 adaugaPiesa(new Incaltaminte(d, b, p, s, m, c));
             } else if (tip == "Bijuterie") {
-                std::string d, b, met; double p, cant; int s;
-                f >> d >> b >> p >> s >> met >> cant;
-                adaugaPiesa(new Bijuterie(d, b, p, s, met, cant));
+                std::string d, b; double p; int s; double carate;
+                f >> d >> b >> p >> s >> carate;
+                adaugaPiesa(new Bijuterie(d, b, p, s, "Aur", carate));
             } else if (tip == "Accesoriu") {
                 std::string d, b, t; double p; int s; bool l;
                 f >> d >> b >> p >> s >> t >> l;
