@@ -1,10 +1,10 @@
-#include "include/Garderoba.h"
-#include "include/Eveniment.h"
-#include "include/Exceptii.h"
-#include "include/Haina.h"
-#include "include/Incaltaminte.h"
-#include "include/Accesoriu.h"
-#include "include/Bijuterie.h"
+#include "Garderoba.hpp"
+#include "Eveniment.hpp"
+#include "Exceptii.hpp"
+#include "Haina.hpp"
+#include "Incaltaminte.hpp"
+#include "Accesoriu.hpp"
+#include "Bijuterie.hpp"
 #include <iostream>
 #include <limits>
 
