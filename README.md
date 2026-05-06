@@ -45,5 +45,4 @@ Jucătorul (Influencerul) trebuie să își construiască o garderobă strategic
 *   **Influencer:** Clasa de gestiune a inventarului și a bugetului.
 *   **FashionException:** Ierarhie proprie de excepții (ex: `BudgetExceededException`, `InvalidAttributeException`).
 *   **EvaluatorEveniment:** Logică separată pentru validarea succesului în funcție de contextul social.
-*   **Smart Pointers:** Utilizarea `std::unique_ptr` pentru prevenirea memory leaks.
 *   **Clone Pattern:** Metodă virtuală pentru realizarea de "deep copy" polimorfic.
