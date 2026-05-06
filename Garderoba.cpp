@@ -4,6 +4,7 @@
 #include "Incaltaminte.hpp"
 #include "Accesoriu.hpp"
 #include "Bijuterie.hpp"
+#include <algorithm>
 #include <fstream>
 
 Garderoba::Garderoba(const std::string& nume, double b) : numeInfluencer(nume), buget(b) {}
@@ -64,4 +65,72 @@ void Garderoba::salveazaInFisier(const std::string& numeFisier) const {
         fout << piese[i]->getTip() << "|" << piese[i]->getDenumire() << "|" << piese[i]->getBrand() << "|" << piese[i]->getPret() << "\n";
     }
     fout.close();
+}
+void Garderoba::afiseazaScorEveniment(const Eveniment& ev) const {
+    double scorTotal = 0;
+    for (auto p : piese) {
+        scorTotal += p->calculeazaImpact() * ev.calculeazaMultiplicator(p->getTip());
+    }
+    std::cout << "\n>>> Impact total pentru evenimentul " << ev.getNume() << ": " << scorTotal << " <<<\n";
+}
+
+void Garderoba::afiseazaTopPiese(int n) const {
+    if (piese.empty()) {
+        std::cout << "Garderoba este goala.\n";
+        return;
+    }
+    
+    std::vector<PiesaVestimentara*> copie = piese;
+    std::sort(copie.begin(), copie.end(), [](PiesaVestimentara* a, PiesaVestimentara* b) {
+        return a->calculeazaImpact() > b->calculeazaImpact();
+    });
+
+    std::cout << "\n TOP " << n << " PIESE DUPA IMPACT \n";
+    for (int i = 0; i < n && i < (int)copie.size(); ++i) {
+        std::cout << i + 1 << ". " << *copie[i] << " (Impact: " << copie[i]->calculeazaImpact() << ")\n";
+    }
+}
+
+void Garderoba::afiseazaHaineImpermeabile() const {
+    std::cout << "\n LISTA HAINE IMPERMEABILE \n";
+    bool gasit = false;
+    for (auto p : piese) {
+        Haina* h = dynamic_cast<Haina*>(p);
+        if (h) {
+            std::cout << *h << "\n";
+            gasit = true;
+        }
+    }
+    if (!gasit) std::cout << "Nu exista haine in garderoba.\n";
+}
+
+void Garderoba::incarcaDinFisier(const std::string& numeFisier) {
+    std::ifstream f(numeFisier);
+    if (!f) throw FisierException(numeFisier);
+
+    std::string tip;
+    while (f >> tip) {
+        try {
+            if (tip == "Haina") {
+                std::string d, b, m; double p; int s; bool i;
+                f >> d >> b >> p >> s >> m >> i;
+                adaugaPiesa(new Haina(d, b, p, s, m, i));
+            } else if (tip == "Incaltaminte") {
+                std::string d, b; double p; int s, m, c;
+                f >> d >> b >> p >> s >> m >> c;
+                adaugaPiesa(new Incaltaminte(d, b, p, s, m, c));
+            } else if (tip == "Bijuterie") {
+                std::string d, b, met; double p, cant; int s;
+                f >> d >> b >> p >> s >> met >> cant;
+                adaugaPiesa(new Bijuterie(d, b, p, s, met, cant));
+            } else if (tip == "Accesoriu") {
+                std::string d, b, t; double p; int s; bool l;
+                f >> d >> b >> p >> s >> t >> l;
+                adaugaPiesa(new Accesoriu(d, b, p, s, t, l));
+            }
+        } catch (const TrendsetterException& e) {
+            std::cerr << "Eroare la incarcarea unei piese: " << e.what() << "\n";
+        }
+    }
+    std::cout << "Import finalizat din " << numeFisier << "\n";
 }
