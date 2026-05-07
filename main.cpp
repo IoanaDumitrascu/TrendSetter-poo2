@@ -113,7 +113,41 @@ int main() {
                 case 3: meniuAdaugaAccesoriu(garderoba);    break;
                 case 4: meniuAdaugaBijuterie(garderoba);    break;
                 case 5: std::cout << garderoba;             break;
-                case 6: meniuEveniment(garderoba);          break;
+                case 6:
+                    {
+                       
+                            std::string numeEv, tipStr;
+                            double pragSucces;
+                        
+                            std::cout << "Nume eveniment: "; std::getline(std::cin, numeEv);
+                            std::cout << "Tip (Gala/Street-Style/Business): "; std::getline(std::cin, tipStr);
+                            
+                        
+                            std::cout << "Introduceti pragul de succes pentru a fi VIRAL: "; 
+                            std::cin >> pragSucces; clearInput();
+                        
+                            try {
+                                Eveniment ev(numeEv, parseTipEveniment(tipStr));
+                                
+                                // Presupunând că ai o metodă care returnează scorul sau o folosim pe cea de afișare
+                                // Dacă metoda ta afiseazaScorEveniment doar printează, o lași așa și adaugi logica după
+                                double scorRealizat = garderoba.calculeazaScorPentruEveniment(ev); 
+                                
+                                std::cout << "\n--- REZULTAT EVENIMENT ---" << std::endl;
+                                std::cout << "Scor realizat: " << scorRealizat << std::endl;
+                                std::cout << "Prag necesar: " << pragSucces << std::endl;
+                        
+                                if (scorRealizat >= pragSucces) {
+                                    std::cout << ">>> FELICITARI! Ai devenit VIRAL pe Social Media! <<<" << std::endl;
+                                } else {
+                                    std::cout << ">>> ESEC... Tinuta nu a impresionat pe nimeni. <<<" << std::endl;
+                                }
+                            } catch (const EvenimentInexistentException& e) {
+                                std::cerr << e.what() << std::endl;
+                            }
+                            break;
+                        }
+                   
                 case 7: {
                     int n;
                     std::cout << "Cate piese sa afisez? "; std::cin >> n; clearInput();
