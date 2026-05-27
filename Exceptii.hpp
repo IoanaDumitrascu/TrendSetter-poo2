@@ -15,23 +15,27 @@ public:
 
 class BugetInsuficientException : public TrendsetterException {
 public:
-    BugetInsuficientException(const std::string& nume, double pret, double buget)
-        : TrendsetterException("Fonduri insuficiente!") {}
+    BugetInsuficientException(const std::string& numePiesa, double pret, double buget)
+        : TrendsetterException("Fonduri insuficiente pentru '" + numePiesa +
+                               "'. Pret: " + std::to_string(pret) +
+                               " RON, Buget: " + std::to_string(buget) + " RON.") {}
 };
 
 class PiesaInvalidaException : public TrendsetterException {
 public:
     PiesaInvalidaException(const std::string& detaliu) : TrendsetterException(detaliu) {}
 };
+
 class EvenimentInexistentException : public TrendsetterException {
 public:
-    EvenimentInexistentException(const std::string& nume) 
+    EvenimentInexistentException(const std::string& nume)
         : TrendsetterException("Evenimentul '" + nume + "' nu este recunoscut!") {}
 };
 
 class FisierException : public TrendsetterException {
 public:
-    FisierException(const std::string& nume) 
+    FisierException(const std::string& nume)
         : TrendsetterException("Eroare la deschiderea fisierului: " + nume) {}
 };
+
 #endif
