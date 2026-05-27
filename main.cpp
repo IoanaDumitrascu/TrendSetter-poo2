@@ -75,7 +75,7 @@ int main() {
 
     Garderoba garderoba(numeIn, bugetIn);
 
-    // Incarcare automata din fisier daca exista
+   
     try {
         garderoba.incarcaDinFisier("garderoba.csv");
         std::cout << "[INFO] Garderoba incarcata din 'garderoba.csv'.\n";
@@ -123,8 +123,7 @@ int main() {
                             try {
                                 Eveniment ev(numeEv, parseTipEveniment(tipStr));
                                 
-                                // Presupunând că ai o metodă care returnează scorul sau o folosim pe cea de afișare
-                                // Dacă metoda ta afiseazaScorEveniment doar printează, o lași așa și adaugi logica după
+                               
                                 double scorRealizat = garderoba.calculeazaScorPentruEveniment(ev); 
                                 
                                 std::cout << "\n--- REZULTAT EVENIMENT ---" << std::endl;
