@@ -22,6 +22,7 @@ public:
     void salveazaInFisier(const std::string& numeFisier) const;
     void incarcaDinFisier(const std::string& numeFisier);
     void afiseazaScorEveniment(const Eveniment& ev) const;
+    double calculeazaScorPentruEveniment(const Eveniment& ev) const;
     void afiseazaTopPiese(int n) const;
     void afiseazaHaineImpermeabile() const;
 
