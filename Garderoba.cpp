@@ -134,3 +134,18 @@ void Garderoba::incarcaDinFisier(const std::string& numeFisier) {
     }
     std::cout << "Import finalizat din " << numeFisier << "\n";
 }
+
+double Garderoba::calculeazaScorPentruEveniment(const Eveniment& ev) const {
+    double total = 0;
+    for (auto p : piese)
+        total += p->calculeazaImpact() * ev.calculeazaMultiplicator(p->getTip());
+    return total;
+}
+
+std::ostream& operator<<(std::ostream& os, const Garderoba& g) {
+    os << "\n=== GARDEROBA: " << g.numeInfluencer << " | Buget ramas: " << g.buget << " RON ===\n";
+    for (size_t i = 0; i < g.piese.size(); ++i)
+        os << "  " << i+1 << ". " << *g.piese[i] << "\n";
+    os << "Total piese create (static): " << PiesaVestimentara::getNrPiese() << "\n";
+    return os;
+}
