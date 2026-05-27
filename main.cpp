@@ -64,12 +64,6 @@ static void meniuAdaugaBijuterie(Garderoba& g) {
     std::cout << "Bijuterie adaugata cu succes!\n";
 }
 
-static void meniuEveniment(const Garderoba& g) {
-    std::cout << "Tip eveniment (Gala / Street-Style / Business): ";
-    std::string tipStr; std::getline(std::cin, tipStr);
-    Eveniment ev(tipStr, parseTipEveniment(tipStr));
-    g.afiseazaScorEveniment(ev);
-}
 
 int main() {
     std::cout << "=== TRENDSETTER: SIMULATOR DE INFLUENTA SI STIL ===\n\n";
